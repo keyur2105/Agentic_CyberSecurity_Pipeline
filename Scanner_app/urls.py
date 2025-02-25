@@ -17,10 +17,10 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
-from .views import home, start_scanning
+from .views import home, scan_target
 
 urlpatterns = [
     path('', home, name="home"),
-    path('scanning/', start_scanning, name="start_scanning"),
+    path('start_scanning/',scan_target, name="scan_target"),
     path("admin/", admin.site.urls)
 ]
