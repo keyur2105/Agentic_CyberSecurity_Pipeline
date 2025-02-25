@@ -2,148 +2,19 @@
 <html lang="en">
 <head>
     <title>Security Scanner</title>
-    <style>
-        /* Cyberpunk Background */
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(45deg, #0f0c29, #302b63, #24243e);
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin: 0;
-            overflow: hidden;
-            color: white;
-            animation: bgMove 10s infinite alternate ease-in-out;
-        }
-
-        /* Floating Heading */
-        h2 {
-            font-size: 2.5rem;
-            text-transform: uppercase;
-            font-weight: bold;
-            text-shadow: 0 0 15px cyan, 0 0 30px blue;
-            animation: float 3s infinite alternate ease-in-out;
-        }
-
-        /* Cyberpunk Glassmorphism Card */
-        form {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 30px;
-            border-radius: 12px;
-            text-align: center;
-            width: 320px;
-            box-shadow: 0px 0px 15px rgba(0, 255, 255, 0.5);
-            border: 1px solid cyan;
-            backdrop-filter: blur(10px);
-            animation: fadeIn 2s ease-in-out;
-        }
-
-        label {
-            font-size: 1.2em;
-            font-weight: bold;
-            display: block;
-            margin-bottom: 8px;
-            color: cyan;
-        }
-
-        /* Centered Input Field */
-        .input-container {
-            display: flex;
-            justify-content: center;
-            width: 100%;
-        }
-
-        /* Glass Input Field */
-        input[type="text"] {
-            width: 80%;
-            padding: 12px;
-            border: 2px solid cyan;
-            border-radius: 6px;
-            outline: none;
-            font-size: 1em;
-            background: rgba(0, 255, 255, 0.1);
-            color: white;
-            text-align: center;
-            transition: 0.3s;
-        }
-
-        input[type="text"]:focus {
-            background: rgba(0, 255, 255, 0.2);
-            box-shadow: 0px 0px 10px cyan;
-        }
-
-        /* Neon Button */
-        button {
-            background: transparent;
-            color: cyan;    
-            padding: 12px 20px;
-            border: 2px solid cyan;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 1em;
-            font-weight: bold;
-            position: relative;
-            overflow: hidden;
-            transition: 0.3s;
-            margin-top: 15px;
-        }
-
-        /* Glowing Button Effect */
-        button::before {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 100%;
-            height: 100%;
-            background: cyan;
-            transform: scale(0);
-            transition: transform 0.3s ease;
-            border-radius: 6px;
-            opacity: 0.3;
-            z-index: -1;
-        }
-
-        button:hover::before {
-            transform: scale(1.3);
-        }
-
-        button:hover {
-            color: black;
-            background: cyan;
-            box-shadow: 0px 0px 15px cyan;
-        }
-
-        /* Floating Effect */
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            100% { transform: translateY(10px); }
-        }
-
-        /* Background Gradient Animation */
-        @keyframes bgMove {
-            0% { background-position: left; }
-            100% { background-position: right; }
-        }
-
-        /* Fade-in Effect */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-    </style>
 </head>
 <body>
     <h2>Start Security Scan</h2>
 
-    <form action="{% url 'start_scanning' %}" method="get">
+    <form action="{% url 'scanning' %}" method="get">
+
         <label>Target URL/IP:</label>
-        <div class="input-container">
-            <input type="text" name="target" required>
-        </div>
+        <input type="text" name="target" required>
         <button type="submit">Start Scan</button>
     </form>
+
+    {% if result %}
+    <p>Scanning: {{ result }}</p>
+    {% endif %}
 </body>
 </html>

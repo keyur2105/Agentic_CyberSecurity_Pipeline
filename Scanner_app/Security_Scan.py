@@ -1,23 +1,39 @@
 import asyncio
 import subprocess
-from langgraph.graph import StateGraph
-from pydantic import BaseModel
-from typing import Dict, List, Optional
+from .models import SecurityScan
 
-# Define the state schema
-class SecurityState(BaseModel):
-    target: str
-    results: Dict[str, str] = {}
-    tasks: List[str] = ["nmap", "gobuster", "ffuf", "sqlmap"]
+async def scanning(tool, target):
+    commands = {
+        "nmap": ["nmap", "-sV", target],
+        "gobuster": ["gobuster", "dir", "-u", target, "-w", "/usr/share/wordlists/dirb/common.txt"],
+        "ffuf": ["ffuf", "-u", f"{target}/FUZZ", "-w", "/usr/share/wordlists/dirb/common.txt"],
+        "sqlmap": ["sqlmap", "-u", target, "--batch", "--level=5"]
+    }
 
-# Function to run external commands safely
-def run_tool(command: List[str]) -> str:  
+    if tool not in commands:
+        return "Invalid tool"
+
+    scan = SecurityScan.objects.create(target=target, tool_used=tool, status="running")
+
     try:
-        result=subprocess.run(command, capture_output=True, text=True, timeout=300)
-        return result.stdout if result.stdout else result.stderr
-    except subprocess.TimeoutExpired:
-        return "Scan timed out"
-    except FileNotFoundError:
-        return "Tool not found, ensure it's installed and in PATH"
+        process = await asyncio.create_subprocess_exec(
+            *commands[tool],
+            stdout=asyncio.subprocess.PIPE,
+            stderr=asyncio.subprocess.PIPE
+        )
+
+        stdout, stderr = await process.communicate()
+        result = stdout.decode().strip() if stdout else stderr.decode().strip()
+
+        scan.result = result
+        scan.status = "completed" if process.returncode == 0 else "failed"
+
+    except asyncio.TimeoutError:
+        scan.result = "Scan timed out"
+        scan.status = "failed"
     except Exception as e:
-        return f"Error: {str(e)}"
+        scan.result = f"Error: {str(e)}"
+        scan.status = "failed"
+
+    scan.save()
+    return scan.result
