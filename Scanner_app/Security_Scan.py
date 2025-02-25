@@ -1,8 +1,8 @@
+import asyncio
 import subprocess
 from .models import SecurityScan
 
-def Scanning(tool, target):
-
+async def scanning(tool, target):
     commands = {
         "nmap": ["nmap", "-sV", target],
         "gobuster": ["gobuster", "dir", "-u", target, "-w", "/usr/share/wordlists/dirb/common.txt"],
@@ -16,10 +16,19 @@ def Scanning(tool, target):
     scan = SecurityScan.objects.create(target=target, tool_used=tool, status="running")
 
     try:
-        result = subprocess.run(commands[tool], capture_output=True, text=True, timeout=300)
-        scan.result = result.stdout
-        scan.status = "completed"
-    except subprocess.TimeoutExpired:
+        process = await asyncio.create_subprocess_exec(
+            *commands[tool],
+            stdout=asyncio.subprocess.PIPE,
+            stderr=asyncio.subprocess.PIPE
+        )
+
+        stdout, stderr = await process.communicate()
+        result = stdout.decode().strip() if stdout else stderr.decode().strip()
+
+        scan.result = result
+        scan.status = "completed" if process.returncode == 0 else "failed"
+
+    except asyncio.TimeoutError:
         scan.result = "Scan timed out"
         scan.status = "failed"
     except Exception as e:

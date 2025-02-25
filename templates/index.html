@@ -6,15 +6,15 @@
 <body>
     <h2>Start Security Scan</h2>
 
-    <form action="/scanning" method="get">
+    <form action="{% url 'start_scanning' %}" method="get">
+
         <label>Target URL/IP:</label>
         <input type="text" name="target" required>
         <button type="submit">Start Scan</button>
     </form>
 
-    {% if target %}
-    {{target}}
+    {% if result %}
+    <p>Scanning: {{ result }}</p>
     {% endif %}
-
 </body>
 </html>

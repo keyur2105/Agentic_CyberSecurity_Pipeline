@@ -1,6 +1,8 @@
+import asyncio
+from collections import deque
 from langgraph.graph import StateGraph
-from . Security_Scan import Scanning
 from pydantic import BaseModel
+from .Security_Scan import scanning  # Ensure proper import
 
 class SecurityState(BaseModel):
     target: str
@@ -8,18 +10,23 @@ class SecurityState(BaseModel):
 
 class SecurityPipeline(StateGraph):
     def __init__(self, target):
-        # Provide a state schema while initializing
         super().__init__(state_schema=SecurityState)
-        
+
         self.target = target
-        self.tasks = ["nmap", "gobuster", "ffuf", "sqlmap"]
+        self.task_queue = deque(["nmap", "gobuster", "ffuf", "sqlmap"])
         self.results = {}
 
-    def execute_task(self, tool):
-        # Dummy implementation
-        self.results[tool] = f"Executed {tool} on {self.target}"
+    async def execute_task(self, tool):
+        print(f"⚙️ Executing {tool} on {self.target}...")
+        result = await scanning(tool, self.target)  # Run asynchronously
+        self.results[tool] = result
 
-    def run_pipeline(self):
-        for tool in self.tasks:
-            self.execute_task(tool)
+        if tool == "nmap" and "open" in result:
+            self.task_queue.append("sqlmap")  # Dynamically add SQLMap if ports are open
+
+    async def run_pipeline(self):
+        while self.task_queue:
+            tool = self.task_queue.popleft()
+            await self.execute_task(tool)
+
         return self.results
