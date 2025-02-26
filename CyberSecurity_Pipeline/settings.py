@@ -28,7 +28,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
-CSRF_TRUSTED_ORIGINS =["216.24.57.252", "https://agentic-cybersecurity-pipeline.onrender.com"]
+# CSRF_TRUSTED_ORIGINS =["216.24.57.252", "https://agentic-cybersecurity-pipeline.onrender.com"]
 
 
 # Application definition
