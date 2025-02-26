@@ -16,7 +16,7 @@ def start_scanning(request):
         if not target:
             return JsonResponse({"error": "Invalid input"}, status=400)
 
-        count = len(data) + 1
+        count = len(result) + 1
         try:
             # Run async scanning function in a separate thread using async_to_sync
             results = async_to_sync(async_scan)(target)
@@ -30,7 +30,7 @@ def start_scanning(request):
             }
             result.append(scan_result)
 
-            return render(request, "Scan_Result.html", {"report": scan_result}) 
+            return JsonResponse({"message": "success", "id": count, "data": results})  
 
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=500)  
