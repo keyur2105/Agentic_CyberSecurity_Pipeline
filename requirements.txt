@@ -1,0 +1,4 @@
+asgiref==3.8.1
+Django==5.1.6
+langgraph==0.2.74
+pydantic==2.10.6
