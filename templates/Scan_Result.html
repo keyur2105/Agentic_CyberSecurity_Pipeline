@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Scan Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white p-10">
+    <div class="max-w-3xl mx-auto bg-gray-800 p-6 rounded-lg shadow-xl">
+        <h2 class="text-3xl font-bold text-blue-400 text-center mb-6">Security Scan Report</h2>
+
+        <p class="text-lg"><strong>🔗 Target URL/IP:</strong> {{ report.target }}</p>
+
+        <div class="mt-4 p-4 bg-gray-700 rounded-lg">
+            <h3 class="text-xl font-semibold text-yellow-400">📌 Nmap Scan Result</h3>
+            <p class="text-gray-300">{{ report.nmap }}</p>
+        </div>
+
+        <div class="mt-4 p-4 bg-gray-700 rounded-lg">
+            <h3 class="text-xl font-semibold text-green-400">📂 Gobuster Directory Scan</h3>
+            <p class="text-gray-300">{{ report.gobuster }}</p>
+        </div>
+
+        <div class="mt-4 p-4 bg-gray-700 rounded-lg">
+            <h3 class="text-xl font-semibold text-red-400">🔎 FFUF Fuzzing Results</h3>
+            <p class="text-gray-300">{{ report.ffuf }}</p>
+        </div>
+
+        <div class="mt-4 p-4 bg-gray-700 rounded-lg">
+            <h3 class="text-xl font-semibold text-purple-400">🛑 SQLMap SQL Injection Test</h3>
+            <p class="text-gray-300">{{ report.sqlmap }}</p>
+        </div>
+
+        <a href="/" class="block mt-6 text-center bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-transform transform hover:scale-105">
+            🔄 Scan Another Website
+        </a>
+    </div>
+</body>
+</html>

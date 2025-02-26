@@ -4,10 +4,10 @@ import asyncio
 from asgiref.sync import async_to_sync
 from .Security_Pipeline import async_scan
 
-data = []
+result = []
 
 def home(request):
-    return render(request, "index.html")
+    return render(request, "Scan_Result.html")
 
 def start_scanning(request):
     if request.method == "POST":  
@@ -21,15 +21,16 @@ def start_scanning(request):
             # Run async scanning function in a separate thread using async_to_sync
             results = async_to_sync(async_scan)(target)
 
-            data.append({
+            scan_result = {
                 "id": count,
                 "target": target,
                 "open_ports": results.get("nmap", "No open ports found"),
                 "directories": results.get("gobuster", "No directories found"),
                 "sql_injection_vulns": results.get("sqlmap", "No SQL injection vulnerabilities found"),
-            })
+            }
+            result.append(scan_result)
 
-            return JsonResponse({"message": "success", "id": count, "data": results})  
+            return render(request, "Scan_Result.html", {"report": scan_result}) 
 
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=500)  
