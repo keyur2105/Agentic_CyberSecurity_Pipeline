@@ -15,23 +15,23 @@ class SecurityPipeline:
         self.results = {}
 
     async def execute_task(self, tool):
-        """Execute a scanning tool asynchronously."""
         print(f"⚙️ Executing {tool} on {self.target}...")
         result = await scanning(tool, self.target)  
         self.results[tool] = result
+        print(f"✅ {tool} scan completed.")
 
         if tool == "nmap" and "open" in result:
             self.task_queue.append("sqlmap")  # Dynamically add SQLMap if ports are open
 
     async def run_pipeline(self):
-        """Run security scanning pipeline asynchronously."""
         while self.task_queue:
             tool = self.task_queue.popleft()
             await self.execute_task(tool)
 
+        print(f"✅ Full scan completed. Results: {self.results}")
         return self.results
 
 async def async_scan(target):
-    """Helper function to handle async scanning."""
+    print(f"🚀 Starting security scan on {target}...")
     pipeline = SecurityPipeline(target)
     return await pipeline.run_pipeline()
