@@ -10,7 +10,7 @@
     <div class="bg-gray-800 p-8 rounded-lg shadow-2xl w-96 text-center ">
         <h2 class="text-3xl font-extrabold mb-4 text-blue-400">Start Security Scan</h2>
 
-        <form action="/scan" method="post">
+        <form action="/scan" method="get">
             {% csrf_token %}
             <label class="block text-sm font-medium mb-2">Target URL/IP:</label>
             <input type="text" name="target" required class="w-full p-3 text-center rounded-lg border border-gray-600 bg-gray-700 text-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-300">

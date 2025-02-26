@@ -10,8 +10,8 @@ def home(request):
     return render(request, "Scan_Result.html")
 
 def start_scanning(request):
-    if request.method == "POST":  
-        target = request.POST.get("target", "").strip()  
+    if request.method == "GET":  
+        target = request.GET.get("target", "").strip()  
         
         if not target:
             return JsonResponse({"error": "Invalid input"}, status=400)
