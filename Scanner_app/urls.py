@@ -20,7 +20,7 @@ from django.urls import path
 from .views import home, start_scanning
 
 urlpatterns = [
-    path('', home, name="home"),
-    path('scanning/', start_scanning, name="start_scanning"),
+    path('', home),
+    path('scan', start_scanning),
     path("admin/", admin.site.urls)
 ]
