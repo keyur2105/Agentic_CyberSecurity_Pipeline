@@ -1,7 +1,9 @@
+# This file handles actual execution of external security tools (Nmap, Gobuster, FFUF, SQLmap) using  subprocess calls.
 import asyncio
 import subprocess
 import os
 
+# prevent blocking the main thread.
 async def scanning(tool, target):
     
     WORDLIST_PATH = os.getenv("WORDLIST_PATH", r"C:\wordlists\SecLists\Discovery\Web-Content\common.txt")

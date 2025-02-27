@@ -1,3 +1,5 @@
+# This file the security scanning process and each tool runs sequentially modifies the task queue 
+# based on results.
 import asyncio
 import json
 import os
@@ -52,7 +54,7 @@ async def async_scan(target):
 
 RESULTS_FILE = "scan_results.json"
 
-def load_existing_results():
+def load_previous_results():
     if os.path.exists(RESULTS_FILE):
         with open(RESULTS_FILE, "r") as file:
             try:
