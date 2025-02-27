@@ -12,7 +12,7 @@ async def scanning(tool, target):
         "nmap": ["C:\\Program Files (x86)\\Nmap\\nmap.exe", "-sV", target],
         "gobuster": ["C:\\Users\\pc26\\go\\bin\\gobuster.exe", "dir", "-u", target, "-w", WORDLIST_PATH],
         "ffuf": ["C:\\Users\\pc26\\go\\bin\\ffuf.exe", "-u", f"{target}/FUZZ", "-w", WORDLIST_PATH],
-        "sqlmap": ["C:\\Users\\pc26\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\sqlmap.exe", "-u", target, "--batch", "--level=1","--risk=1"]
+        "sqlmap": ["C:\\Users\\pc26\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\sqlmap.exe", "-u", target, "--batch", "--level=2","--risk=2"]
     }
     
     if tool not in commands:
