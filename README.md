@@ -3,7 +3,7 @@
 # 🚀 Agentic Cybersecurity Pipeline using LangGraph & LangChain.
 
 
-# Project Overview : 
+## Project Overview : 
 
 --> This project is a rule-based agentic cybersecurity pipeline that autonomously scans a given target for security
 vulnerabilities using various tools like Nmap, Gobuster, FFUF, and SQLmap. 
@@ -12,7 +12,7 @@ vulnerabilities using various tools like Nmap, Gobuster, FFUF, and SQLmap.
 comprehensive security scanning.
 
 
-# Features : 
+## Features : 
 --> Automated Scanning Pipeline : Runs a series of security scans sequentially.
 --> Dynamic Task Execution : Adds SQLMap dynamically based on open ports found by Nmap. 
 --> Asynchronous Execution : Uses Python's asyncio for non-blocking execution. 
@@ -26,7 +26,7 @@ comprehensive security scanning.
    git clone https://github.com/keyur2105/Agentic_CyberSecurity_Pipeline.git
 
 
-# Projects Structure/Root :
+## Projects Structure/Root :
 
 CyberSecurity_Pipeline/
 │-- Scanner_app/
@@ -44,7 +44,7 @@ CyberSecurity_Pipeline/
 │-- README.md                 # Project documentation
 
 
-# Installation & Setup : 
+## Installation & Setup : 
 Ensure you have the following installed:
 
 --> Python 3.11
@@ -53,24 +53,24 @@ Ensure you have the following installed:
 --> LangGraph & LangChain
 
 
-# Security Tools Used : 
+## Security Tools Used : 
 
 --> Nmap : Scans open ports & services 
 --> Gobuster : Directory brute-forcing 
 --> FFUF : Web fuzzing 
 --> SQLmap : SQL injection testing
 
-# How It Works this Project :
+## How It Works this Project :
 
-Security_Pipeline.py 
+### Security_Pipeline.py 
 --> SecurityPipeline Class: Manages the scanning process using a task queue. 
 --> execute_task(): Runs each tool asynchronously. 
 --> run_pipeline(): Iterates through the task queue and executes scans dynamically.
 
-Security_Scan.py 
+### Security_Scan.py 
 --> scanning(): Executes security tools using asyncio.create_subprocess_exec(). 
 --> Error Handling: Handles missing tools, timeouts, and subprocess failures.
 
-views.py 
+### views.py 
 --> start_scanning(): Handles API requests and triggers async_scan(). 
 --> async_scan(): Calls SecurityPipeline asynchronously and returns results.
