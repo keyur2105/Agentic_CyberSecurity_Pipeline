@@ -1,9 +1,9 @@
 
 
-🚀 Agentic Cybersecurity Pipeline using LangGraph & LangChain.
+# 🚀 Agentic Cybersecurity Pipeline using LangGraph & LangChain.
 
 
-Project Overview : 
+# Project Overview : 
 
 --> This project is a rule-based agentic cybersecurity pipeline that autonomously scans a given target for security
 vulnerabilities using various tools like Nmap, Gobuster, FFUF, and SQLmap. 
@@ -12,15 +12,21 @@ vulnerabilities using various tools like Nmap, Gobuster, FFUF, and SQLmap.
 comprehensive security scanning.
 
 
-Features : 
+# Features : 
 --> Automated Scanning Pipeline : Runs a series of security scans sequentially.
 --> Dynamic Task Execution : Adds SQLMap dynamically based on open ports found by Nmap. 
 --> Asynchronous Execution : Uses Python's asyncio for non-blocking execution. 
 --> Django-based API : Provides a simple web interface for scanning. 
 --> Error Handling & Logging : Manages errors, logs outputs, and ensures robustness.
 
+## Setup Instructions
 
-Projects Structure/Root :
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/keyur2105/Agentic_CyberSecurity_Pipeline.git
+
+
+# Projects Structure/Root :
 
 CyberSecurity_Pipeline/
 │-- Scanner_app/
@@ -38,22 +44,23 @@ CyberSecurity_Pipeline/
 │-- README.md                 # Project documentation
 
 
-Installation & Setup : 
+# Installation & Setup : 
 Ensure you have the following installed:
+
 --> Python 3.11
 --> Django
 --> Nmap, Gobuster, FFUF, SQLmap (Ensure they are installed and accessible via the system path)
 --> LangGraph & LangChain
 
 
-Security Tools Used : 
+# Security Tools Used : 
+
 --> Nmap : Scans open ports & services 
 --> Gobuster : Directory brute-forcing 
 --> FFUF : Web fuzzing 
 --> SQLmap : SQL injection testing
 
-
-How It Works this Project :
+# How It Works this Project :
 
 Security_Pipeline.py 
 --> SecurityPipeline Class: Manages the scanning process using a task queue. 
