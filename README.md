@@ -28,20 +28,20 @@ comprehensive security scanning.
 
 ## Projects Structure/Root :
 
-CyberSecurity_Pipeline/
-│-- Scanner_app/
-│   ├── Security_Pipeline.py  # Core pipeline logic using LangGraph
-│   ├── Security_Scan.py      # Security tool execution logic
-│   ├── views.py              # Django views handling requests
-│   ├── templates/
-│   │   ├── Scan_Result.html  # Frontend UI for viewing results
-│   ├── static/
-│   │   ├── styles.css        # CSS for UI styling
-│   ├── urls.py               # Django URL configuration
-│   ├── models.py             # Database models (if required)
-│-- requirements.txt          # Required dependencies
-│-- scan_results.json         # Stores past scan results
-│-- README.md                 # Project documentation
+#### CyberSecurity_Pipeline/
+##### │-- Scanner_app/
+##### │   ├── Security_Pipeline.py  # Core pipeline logic using LangGraph
+##### │   ├── Security_Scan.py      # Security tool execution logic
+##### │   ├── views.py              # Django views handling requests
+##### │   ├── templates/
+##### │   │   ├── Scan_Result.html  # Frontend UI for viewing results
+##### │   ├── static/
+##### │   │   ├── styles.css        # CSS for UI styling
+##### │   ├── urls.py               # Django URL configuration
+##### │   ├── models.py             # Database models (if required)
+##### │-- requirements.txt          # Required dependencies
+##### │-- scan_results.json         # Stores past scan results
+##### │-- README.md                 # Project documentation
 
 
 ## Installation & Setup : 
